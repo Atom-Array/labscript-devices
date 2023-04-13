@@ -11,8 +11,12 @@ class NIStreamBlaster(PseudoclockDevice):
     clock_resolution = 1/clock_limit  # time granularity
 
     def __init__(self, name, nimax_name, samp_rate=10e6, trigger_device=None, trigger_connection=None):
+
         PseudoclockDevice.__init__(
-            self=self,
+            self,  # - [works] without keyword
+            # inst=self,  # - [works] with correct keyword
+            #                       - decorator modifies actual signature - `inst` is expected, not `self`
+            # self=self,  # - [doesn't work]
             name=name,
             trigger_device=trigger_device,
             trigger_connection=trigger_connection
